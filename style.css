@@ -1,0 +1,463 @@
+/* ...existing code... */
+/* head 内と body 内の style をまとめたもの */
+:root { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif; line-height: 1.5; }
+:root { --hero-overlap: 96px; --main-bg: #222227; }
+body { margin: 0; color: #222; background: #f7f7f7; }
+.wrap { max-width: 900px; margin: 40px auto; padding: 20px; background: rgba(255,255,255,0.9); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+header h1 { margin: 0 0 8px; font-size: 1.6rem; }
+nav { margin-top: 8px; }
+nav a { color: #0366d6; text-decoration: none; margin-right: 12px; }
+footer { margin-top: 30px; font-size: 0.9rem; color: #666; text-align: center; }
+
+html, body {
+    background-color: #222227;
+    color: #e6e6e6; /* テキストは見える色に調整 */
+}
+
+/* loader を確実に中央に配置・固定し、非表示時は見えなくする */
+.loader {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    background: #222227;
+    z-index: 9999;
+    transition: opacity 500ms ease, visibility 500ms;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* 隠すクラス（visibility も切る）*/
+.loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ロゴが左上に寄る問題の対策：確実に中央に配置 */
+.loader-logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 280px;
+    width: min(70%, 280px);
+    height: auto;
+}
+
+/* bar 周りをセンターに維持 */
+.loader-bar-wrap {
+    position: relative;
+    width: min(560px, 80%);
+    height: 28px;
+}
+
+/* thumb を非表示にしている場合でもレイアウトに影響しない */
+.loader-thumb { display: none; }
+
+/* フェードイン対象（スクロールで表示） */
+.fade-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 600ms cubic-bezier(.2,.9,.2,1), transform 600ms cubic-bezier(.2,.9,.2,1);
+    will-change: opacity, transform;
+}
+
+/* ビューに入ったら表示 */
+.fade-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* footer の文字色をはっきり見せる（必要に応じて調整） */
+footer { color: #ddd; }
+
+/* ロゴ */
+.loader-logo {
+    max-width: 220px;
+    width: 50%;
+    height: auto;
+    display: block;
+}
+
+/* プログレスバー周り */
+.loader-bar-wrap {
+    position: relative;
+    width: min(560px, 80%);
+    height: 28px;
+}
+
+/* トラック */
+.loader-bar {
+    width: 100%;
+    height: 8px;
+    background: #e6e6e6;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+/* 進捗（塗り）*/
+.loader-progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,#ff7a59,#ffb86b);
+    transition: width 200ms linear;
+}
+
+.loader-percent {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 6px 8px;
+    border-radius: 999px;
+    pointer-events: none;
+    user-select: none;
+    transition: left 120ms linear, opacity 200ms ease, transform 120ms linear;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    z-index: 2;
+}
+
+/* 進行位置のサム（thumb）*/
+.loader-thumb {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 44px;
+    width: 44px;
+    pointer-events: none;
+    user-select: none;
+    transition: left 120ms linear;
+}
+
+.bg-image {
+    position: fixed;      /* fixed にしてスクロールしても位置を維持 */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: var(--hero-height, 60vh); /* JS で実高さをセット */
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 700ms ease;
+}
+
+/* bg の img は幅を画面に合わせアスペクト比を維持 */
+.bg-image img {
+    display: block;
+    width: 100vw;
+    height: auto;
+    max-width: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* front-image は bg-image 内で同じサイズで重ねる */
+.bg-image  {
+    /* 文書フロー内から抜いて画面上に常時固定表示 */
+    position: fixed !important;
+    inset: 0;                /* top:0; right:0; bottom:0; left:0; */
+    width: 100vw;
+    height: var(--hero-height, 60vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0 !important; /* 確実に最前面へ */
+    opacity: 0;
+    transition: opacity 1600ms ease;
+}
+
+/* front-image を必ず最前面に固定表示（body直下前提） */
+.front-image {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--hero-height, 60vh) !important;
+    width: 100vw !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none !important;
+    z-index: 100 !important; /* 最大近くの値で確実に最前面へ */
+    opacity: 0;
+    transition: opacity 3200ms ease !important;
+}
+
+/* 表示クラスで見せる */
+.front-image.visible {
+    opacity: 1 !important;
+}
+
+/* front 内 img の調整 */
+.front-image img {
+    display: block;
+    width: 100vw;
+    height: auto;
+    max-width: none;
+    pointer-events: none;
+}
+
+.bg-image {
+    display: block;
+    width: 100vw;
+    height: auto;
+    max-width: none;
+    pointer-events: none;
+}
+
+.bg-image .front-image,
+.bg-image .front-image.visible {
+    position: static !important;
+    z-index: auto !important;
+    opacity: 0 !important;
+}
+.bg-image.loaded { opacity: 1; }
+.bg-image .front-image.visible { opacity: 1; }
+
+/* プレースホルダー：文書フロー内に高さを確保（--hero-height を反映） */
+.hero-spacer {
+    display: block;
+    width: 100%;
+    height: var(--hero-height, 60vh);
+    pointer-events: none;
+}
+
+/* main は spacer によって下にずれるので余白不要 */
+.site-main {
+    position: relative;
+    z-index: 2;
+    background: transparent;        /* ここは透明にして疑似要素で背景を作る */
+    color: #e6e6e6;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+/* main 全体の背景（画像と馴染む上端を除いた部分） */
+.site-main::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--hero-overlap); /* 重なり分だけ下から背景を始める */
+    bottom: 0;
+    background: var(--main-bg); /* 実際のメイン背景色 */
+    z-index: 2;                 /* pseudo 背景はコンテンツより下 */
+    pointer-events: none;
+}
+
+/* main 上端の馴染ませるグラデーション（画像が下から透ける部分） */
+.site-main::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: var(--hero-overlap);
+    pointer-events: none;
+    background: linear-gradient(
+        to bottom,
+        rgba(34,34,39,0) 0%,
+        rgba(34,34,39,0.18) 28%,
+        rgba(34,34,39,0.55) 62%,
+        rgba(34,34,39,1) 100%
+    );
+    z-index: 3; /* グラデは背景の上、コンテンツの下に位置 */
+}
+
+/* main の中身は疑似要素より前面に出す */
+.site-main > * {
+    position: relative;
+    z-index: 4;
+}
+
+/* .wrap が白背景などを持っている場合は透明化（既に適用済みなら不要） */
+.site-main .wrap {
+    background: transparent !important;
+    box-shadow: none !important;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+/* main 内先頭要素の余白を抑える */
+.site-main > *:first-child { margin-top: 0; }
+
+/* hero（画像）より main を前面に見せる */
+.bg-image { z-index: 0; }
+.bg-image .front-image { z-index: 1; }
+
+/* site-main のコンテンツは pseudo 要素より前に表示 */
+.site-main > * { position: relative; z-index: 4; }
+
+/* トップカウントダウン（フェード領域に重ねて中央表示） */
+.top-countdown {
+    position: absolute;
+    left: 50%;
+    /* フェード領域の中央付近に重ねる */
+    top: calc(var(--hero-overlap, 96px) / 2);
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 5; /* ::before(3) と main コンテンツ(4) の上に出す */
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #fff;
+    text-align: center;
+    padding: 6px 10px;
+    background: linear-gradient(90deg, rgba(0,0,0,0.18), rgba(0,0,0,0.08));
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    user-select: none;
+}
+
+.top-countdown-title {
+    display: block;
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    font-size: clamp(12px, 1.6vw, 18px);
+    letter-spacing: 1px;
+    color: #fff;
+    opacity: 0.95;
+    margin-bottom: 6px;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* カウントダウン内の数値とラベル */
+.top-countdown .cd-item { display:flex; flex-direction:column; align-items:center; min-width:56px; }
+.top-countdown .cd-val {
+    font-weight:700;
+    font-size: clamp(18px, 3.6vw, 42px);
+    line-height:1;
+    letter-spacing:0.6px;
+}
+.top-countdown .cd-label {
+    font-size:12px;
+    opacity:0.9;
+    margin-top:4px;
+}
+
+/* 値更新時の軽微なスケールアニメ */
+.top-countdown .cd-val.update {
+    transform: scale(1.08);
+    transition: transform 180ms ease;
+}
+
+/* 画面幅が狭いときの微調整 */
+@media (max-width:520px) {
+    .top-countdown { gap:8px; padding:6px 8px; border-radius:8px; }
+    .top-countdown .cd-item { min-width:44px; }
+    .top-countdown .cd-val { font-size: clamp(16px, 6vw, 28px); }
+    .top-countdown-title { font-size: 13px; margin-bottom: 4px; }
+}
+
+/* show-info: labels small, values large, center under countdown */
+.show-info {
+    position: absolute;
+    z-index: 2147483647;
+}
+
+.show-info .info-block {
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+}
+
+.show-info .info-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.show-info .info-value {
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+}
+
+@media (max-width:720px) {
+    .show-info { gap: 10px; top: calc(var(--hero-overlap,96px) / 2 + 96px); }
+    .show-info .info-block { min-width: 84px; }
+    .show-info .info-value { font-size: 16px; }
+}
+
+@media (max-width:420px) {
+    .show-info { flex-direction: column; top: calc(var(--hero-overlap,96px) / 2 + 100px); }
+}
+
+/* footer {
+    position: relative;
+    z-index: 2;
+    padding: 10px 20px;
+    color: #222;
+    text-align: center;
+} */
+/* ローダーは既存を維持（ここでは背景色など既に設定済み） */
+
+
+/* もし別箇所で .wrap に上マージンが残っているなら上書き */
+
+
+/* ローダーがある間、コンテンツが邪魔にならないように footer などを前面に */
+body > footer { position: relative; z-index: 1; }
+/* コンテンツを読みやすくする例 */
+body > footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* 強制: image2（.front-image）を常に main より前面に表示 */
+.front-image,
+.bg-image .front-image {
+    position: fixed !important;
+    inset: 0 !important; /* top:0; right:0; bottom:0; left:0; */
+    width: 100vw !important;
+    height: var(--hero-height, 60vh) !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none !important;
+    z-index: 100000 !important; /* 十分大きい値で最前面へ */
+    transition: opacity 400ms ease !important;
+    opacity: 0; /* 通常は非表示、.visible で表示 */
+}
+
+/* 表示クラスで確実に見せる */
+.front-image.visible,
+.bg-image .front-image.visible {
+    opacity: 1 !important;
+    z-index: 100000 !important;
+}
+
+/* 内部 img の調整 */
+.front-image img,
+.bg-image .front-image img {
+    display: block;
+    width: 100vw;
+    height: auto;
+    max-width: none;
+    pointer-events: none;
+}
+
+.moji {
+    margin-top: auto;
+    position: absolute;
+}
