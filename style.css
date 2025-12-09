@@ -1,21 +1,55 @@
-/* ...existing code... */
-/* head 内と body 内の style をまとめたもの */
-:root { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif; line-height: 1.5; }
-:root { --hero-overlap: 96px; --main-bg: #222227; }
-body { margin: 0; color: #222; background: #f7f7f7; }
-.wrap { max-width: 900px; margin: 40px auto; padding: 20px; background: rgba(255,255,255,0.9); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-header h1 { margin: 0 0 8px; font-size: 1.6rem; }
-nav { margin-top: 8px; }
-nav a { color: #0366d6; text-decoration: none; margin-right: 12px; }
-footer { margin-top: 30px; font-size: 0.9rem; color: #666; text-align: center; }
+:root { 
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    line-height: 1.5; 
+}
+
+:root { 
+    --hero-overlap: 96px; 
+    --main-bg: #222227; 
+}
+
+body { 
+    margin: 0; 
+    color: #222; 
+    background: #f7f7f7; 
+}
+.wrap { 
+    max-width: 900px; 
+    margin: 40px auto; 
+    padding: 20px; 
+    background: rgba(255,255,255,0.9); 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); 
+}
+
+header h1 { 
+    margin: 0 0 8px; 
+    font-size: 1.6rem; 
+}
+
+nav { 
+    margin-top: 8px; 
+}
+
+nav a { 
+    color: #0366d6; 
+    text-decoration: none; 
+    margin-right: 12px; 
+}
+
+footer { 
+    margin-top: 30px; 
+    font-size: 0.9rem;  
+    color: #666; 
+    text-align: center;
+    z-index: 99999;
+}
 
 html, body {
     background-color: #222227;
-    color: #e6e6e6; /* テキストは見える色に調整 */
-    overflow-x: hidden; /* 横スクロールの保険 */
+    color: #e6e6e6; 
+    overflow-x: hidden; 
 }
 
-/* loader を確実に中央に配置・固定し、非表示時は見えなくする */
 .loader {
     position: fixed;
     inset: 0;
@@ -32,14 +66,12 @@ html, body {
     pointer-events: auto;
 }
 
-/* 隠すクラス（visibility も切る）*/
 .loader.hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
 }
 
-/* ロゴが左上に寄る問題の対策：確実に中央に配置 */
 .loader-logo {
     display: block;
     margin: 0 auto;
@@ -48,17 +80,19 @@ html, body {
     height: auto;
 }
 
-/* bar 周りをセンターに維持 */
 .loader-bar-wrap {
     position: relative;
     width: min(560px, 80%);
     height: 28px;
 }
 
-/* thumb を非表示にしている場合でもレイアウトに影響しない */
-.loader-thumb { display: none; }
+/* ローダーの画像非表示部分 */
+.loader-thumb { 
+    display: 
+    none; 
+}
 
-/* フェードイン対象（スクロールで表示） */
+/* フェードインさせるならこれつける */
 .fade-on-scroll {
     opacity: 0;
     transform: translateY(24px);
@@ -66,14 +100,10 @@ html, body {
     will-change: opacity, transform;
 }
 
-/* ビューに入ったら表示 */
 .fade-on-scroll.in-view {
     opacity: 1;
     transform: translateY(0);
 }
-
-/* footer の文字色をはっきり見せる（必要に応じて調整） */
-footer { color: #ddd; }
 
 /* ロゴ */
 .loader-logo {
@@ -83,14 +113,12 @@ footer { color: #ddd; }
     display: block;
 }
 
-/* プログレスバー周り */
 .loader-bar-wrap {
     position: relative;
     width: min(560px, 80%);
     height: 28px;
 }
 
-/* トラック */
 .loader-bar {
     width: 100%;
     height: 8px;
@@ -99,7 +127,7 @@ footer { color: #ddd; }
     overflow: hidden;
 }
 
-/* 進捗（塗り）*/
+/* プログレスバー本体*/
 .loader-progress {
     height: 100%;
     width: 0%;
@@ -127,7 +155,7 @@ footer { color: #ddd; }
     z-index: 2;
 }
 
-/* 進行位置のサム（thumb）*/
+/*進行位置*/
 .loader-thumb {
     display: none;
     z-index: 1;
@@ -142,11 +170,11 @@ footer { color: #ddd; }
 }
 
 .bg-image {
-    position: fixed;      /* fixed にしてスクロールしても位置を維持 */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100vw;
-    height: var(--hero-height, 60vh); /* JS で実高さをセット */
+    height: var(--hero-height, 60vh); 
     overflow: hidden;
     pointer-events: none;
     z-index: 0;
@@ -154,7 +182,6 @@ footer { color: #ddd; }
     transition: opacity 700ms ease;
 }
 
-/* bg の img は幅を画面に合わせアスペクト比を維持 */
 .bg-image img {
     display: block;
     width: 100vw;
@@ -164,45 +191,40 @@ footer { color: #ddd; }
     pointer-events: none;
 }
 
-/* front-image は bg-image 内で同じサイズで重ねる */
 .bg-image  {
-    /* 文書フロー内から抜いて画面上に常時固定表示 */
-    position: fixed !important;
-    inset: 0;                /* top:0; right:0; bottom:0; left:0; */
+    position: fixed;
+    inset: 0;                
     width: 100vw;
     height: var(--hero-height, 60vh);
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    z-index: 0 !important; /* 確実に最前面へ */
+    z-index: 0; 
     opacity: 0;
-    transition: opacity 1600ms ease;
+    transition: opacity 1600ms ease; /* 1.6秒で表示 */
 }
 
-/* front-image を必ず最前面に固定表示（body直下前提） */
 .front-image {
-    position: fixed !important;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: var(--hero-height, 60vh) !important;
-    width: 100vw !important;
-    display: flex !important;
+    height: var(--hero-height, 60vh);
+    width: 100vw;
+    display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: none !important;
-    z-index: 100 !important; /* 最大近くの値で確実に最前面へ */
+    pointer-events: none;
+    z-index: 100 ;
     opacity: 0;
-    transition: opacity 3200ms ease !important;
+    transition: opacity 3200ms ease; /* 3.2秒で表示 */
 }
 
-/* 表示クラスで見せる */
 .front-image.visible {
     opacity: 1 !important;
 }
 
-/* front 内 img の調整 */
 .front-image img {
     display: block;
     width: 100vw;
@@ -228,7 +250,7 @@ footer { color: #ddd; }
 .bg-image.loaded { opacity: 1; }
 .bg-image .front-image.visible { opacity: 1; }
 
-/* プレースホルダー：文書フロー内に高さを確保（--hero-height を反映） */
+/*メイン文の表示位置の修正*/
 .hero-spacer {
     display: block;
     width: 100%;
@@ -236,31 +258,29 @@ footer { color: #ddd; }
     pointer-events: none;
 }
 
-/* main は spacer によって下にずれるので余白不要 */
 .site-main {
     position: relative;
     z-index: 2;
-    background: transparent;        /* ここは透明にして疑似要素で背景を作る */
+    background: transparent;
     color: #e6e6e6;
     padding: 20px;
     box-sizing: border-box;
     overflow: visible;
 }
 
-/* main 全体の背景（画像と馴染む上端を除いた部分） */
 .site-main::after {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
-    top: var(--hero-overlap); /* 重なり分だけ下から背景を始める */
+    top: var(--hero-overlap);
     bottom: 0;
-    background: var(--main-bg); /* 実際のメイン背景色 */
-    z-index: 2;                 /* pseudo 背景はコンテンツより下 */
+    background: var(--main-bg);
+    z-index: 2;
     pointer-events: none;
 }
 
-/* main 上端の馴染ませるグラデーション（画像が下から透ける部分） */
+/* グラデーション*/
 .site-main::before {
     content: "";
     position: absolute;
@@ -276,38 +296,15 @@ footer { color: #ddd; }
         rgba(34,34,39,0.55) 62%,
         rgba(34,34,39,1) 100%
     );
-    z-index: 3; /* グラデは背景の上、コンテンツの下に位置 */
+    z-index: 3;
 }
 
-/* main の中身は疑似要素より前面に出す */
-.site-main > * {
-    position: relative;
-    z-index: 4;
-}
 
-/* .wrap が白背景などを持っている場合は透明化（既に適用済みなら不要） */
-.site-main .wrap {
-    background: transparent !important;
-    box-shadow: none !important;
-    padding-top: 0;
-    margin-top: 0;
-}
 
-/* main 内先頭要素の余白を抑える */
-.site-main > *:first-child { margin-top: 0; }
-
-/* hero（画像）より main を前面に見せる */
-.bg-image { z-index: 0; }
-.bg-image .front-image { z-index: 1; }
-
-/* site-main のコンテンツは pseudo 要素より前に表示 */
-.site-main > * { position: relative; z-index: 4; }
-
-/* トップカウントダウン（フェード領域に重ねて中央表示） */
+/* カウントダウン*/
 .top-countdown {
     position: absolute;
     left: 50%;
-    /* フェード領域の中央付近に重ねる */
     top: calc(var(--hero-overlap, 96px) / 2);
     transform: translate(-50%, -50%);
     display: flex;
@@ -315,7 +312,7 @@ footer { color: #ddd; }
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    z-index: 5; /* ::before(3) と main コンテンツ(4) の上に出す */
+    z-index: 5; 
     font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     color: #fff;
     text-align: center;
@@ -340,7 +337,6 @@ footer { color: #ddd; }
     user-select: none;
 }
 
-/* カウントダウン内の数値とラベル */
 .top-countdown .cd-item { display:flex; flex-direction:column; align-items:center; min-width:56px; }
 .top-countdown .cd-val {
     font-weight:700;
@@ -354,13 +350,12 @@ footer { color: #ddd; }
     margin-top:4px;
 }
 
-/* 値更新時の軽微なスケールアニメ */
+/*数が変わった時のアニメーション*/
 .top-countdown .cd-val.update {
     transform: scale(1.08);
     transition: transform 180ms ease;
 }
 
-/* 画面幅が狭いときの微調整 */
 @media (max-width:520px) {
     .top-countdown { gap:8px; padding:6px 8px; border-radius:8px; }
     .top-countdown .cd-item { min-width:44px; }
@@ -368,15 +363,13 @@ footer { color: #ddd; }
     .top-countdown-title { font-size: 13px; margin-bottom: 4px; }
 }
 
-/* show-info: labels small, values large, center under countdown */
 .show-info {
-    /* 以前の width: 100vw; position: absolute; は横スクロールの原因 */
     position: relative;
     width: 100%;
-    max-width: 1200px;          /* コンテンツ幅を制限 */
+    max-width: 1200px;         
     margin: 0 auto;
-    padding: 0 16px;            /* 画面端の余白 */
-    z-index: 4;                 /* 過剰な z-index を調整 */
+    padding: 0 16px;
+    z-index: 4;
     box-sizing: border-box;
 }
 
@@ -410,58 +403,9 @@ footer { color: #ddd; }
     .show-info { flex-direction: column; top: calc(var(--hero-overlap,96px) / 2 + 100px); }
 }
 
-/* footer {
-    position: relative;
-    z-index: 2;
-    padding: 10px 20px;
-    color: #222;
-    text-align: center;
-} */
-/* ローダーは既存を維持（ここでは背景色など既に設定済み） */
-
-
-/* もし別箇所で .wrap に上マージンが残っているなら上書き */
-
-
-/* ローダーがある間、コンテンツが邪魔にならないように footer などを前面に */
-body > footer { position: relative; z-index: 1; }
-/* コンテンツを読みやすくする例 */
 body > footer {
     position: relative;
-    z-index: 1;
-}
-
-/* 強制: image2（.front-image）を常に main より前面に表示 */
-.front-image,
-.bg-image .front-image {
-    position: fixed !important;
-    inset: 0 !important; /* top:0; right:0; bottom:0; left:0; */
-    width: 100vw !important;
-    height: var(--hero-height, 60vh) !important;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none !important;
-    z-index: 100000 !important; /* 十分大きい値で最前面へ */
-    transition: opacity 400ms ease !important;
-    opacity: 0; /* 通常は非表示、.visible で表示 */
-}
-
-/* 表示クラスで確実に見せる */
-.front-image.visible,
-.bg-image .front-image.visible {
-    opacity: 1 !important;
-    z-index: 100000 !important;
-}
-
-/* 内部 img の調整 */
-.front-image img,
-.bg-image .front-image img {
-    display: block;
-    width: 100vw;
-    height: auto;
-    max-width: none;
-    pointer-events: none;
+    z-index: 99999;
 }
 
 .moji {
@@ -498,8 +442,8 @@ a{
 
 /* KMNZ 説明カード */
 .kmnz-card {
-    max-width: 960px; /* 860px -> 960px に拡張 */
-    width: min(960px, calc(100% - 40px)); /* 画面幅から左右20pxずつの余白を確保 */
+    max-width: 960px;
+    width: min(960px, calc(100% - 40px));
     margin: 24px auto;
     padding: clamp(16px, 3.5vw, 28px);
     background: var(--main-bg);
@@ -509,7 +453,6 @@ a{
     box-sizing: border-box;
 }
 
-/* タイトルのタイポグラフィ（Orbitronを活かす） */
 .kmnz-card-title {
     margin: 0 0 10px;
     font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -520,7 +463,6 @@ a{
     text-align: left;
 }
 
-/* 本文のタイポグラフィ（読みやすさ優先） */
 .kmnz-card-text {
     margin: 0;
     font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", system-ui, -apple-system, sans-serif;
@@ -530,30 +472,29 @@ a{
     word-break: break-word;
 }
 
-/* カード内の改行を少しタイトに */
 .kmnz-card-text br { content: ""; display: block; margin-top: 6px; }
 
-/* モバイル微調整 */
+
 @media (max-width: 520px) {
-    .kmnz-card { margin: 20px auto; } /* 横は width 計算で余白確保済み */
+    .kmnz-card { margin: 20px auto; } 
 }
 
-/* フェード専用（動きなしで透明度のみ） */
+/*浮かび上がってくるタイプのフェードはこれもつける*/
 .fade-on-scroll.fade-soft {
-    transform: none;                 /* 移動なし */
-    transition: opacity 800ms ease;  /* 透明度のみ */
+    transform: none;                 
+    transition: opacity 800ms ease;  
     will-change: opacity;
 }
 .fade-on-scroll.fade-soft.in-view {
     opacity: 1;
 }
 
-/* TICKET セクション */
+
 .ticket-section {
-    max-width: 1200px; /* 1080px 相当から拡張 */
-    width: min(1200px, calc(100% - 40px)); /* 左右余白を確保しつつ広げる */
+    max-width: 1200px; 
+    width: min(1200px, calc(100% - 40px));
     margin: 24px auto 40px;
-    padding: 0;                 /* 余白は外側の width 調整で確保 */
+    padding: 0;
     position: relative;
     z-index: 4;
     box-sizing: border-box;
@@ -561,7 +502,7 @@ a{
 .ticket-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px; /* 18px -> 22px */
+    gap: 22px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -653,7 +594,8 @@ a{
 }
 .ticket-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0,0,0,0.36); }
 .ticket-btn:active { transform: translateY(0); box-shadow: 0 6px 18px rgba(0,0,0,0.28); opacity: 0.9; }
-/* チケット: 終了状態 */
+
+
 .ticket-card.is-closed {
     opacity: 0.92;
     filter: grayscale(12%);
@@ -688,13 +630,14 @@ a{
     padding: 0;
     box-sizing: border-box;
 }
+
+/*画像後で入れる*/
 .goods-placeholder {
     width: 100%;
-    /* 画像を後で入れる想定の比率ボックス（16:9） */
     aspect-ratio: 16 / 9;
     border: 2px solid rgba(255,255,255,0.95);
     border-radius: 16px;
-    background: #111; /* ブラックアウト */
+    background: #111;
     box-shadow: 0 10px 28px rgba(0,0,0,0.35);
     display: grid;
     place-items: center;
@@ -710,13 +653,11 @@ a{
     text-align: center;
 }
 
-/* モバイル微調整 */
 @media (max-width: 520px) {
     .goods-section { width: min(100%, calc(100% - 24px)); }
     .goods-placeholder { border-radius: 12px; }
 }
 
-/* 注意事項（アコーディオン） */
 .notes-section {
     max-width: 960px;
     width: min(960px, calc(100% - 40px));
@@ -743,7 +684,7 @@ a{
 }
 .acc-summary::-webkit-details-marker { display: none; }
 
-/* 開閉アイコン（＋／−） */
+/* 開閉アイコン*/
 .acc-summary::after {
     content: "+";
     position: absolute;
@@ -766,7 +707,6 @@ a{
     background: rgba(255,255,255,0.04);
 }
 
-/* モバイル微調整 */
 @media (max-width: 520px) {
     .notes-section { width: min(100%, calc(100% - 24px)); }
     .acc-summary { padding: 12px 14px; }
@@ -854,3 +794,127 @@ a{
 }
 .share-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0,0,0,0.36); }
 .share-btn:active { transform: translateY(0); opacity: .92; }
+
+/* 出演者リスト用の最小スタイル */
+      .cast-list { max-width: 720px; margin: 24px auto; padding: 0 16px; display: flex; flex-direction: column; gap: 20px; }
+      .cast-item { display: flex; align-items: center; gap: 16px; }
+      .cast-avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 1px solid #e5e5e5; }
+      .cast-info { display: flex; align-items: center; gap: 12px; }
+      .cast-name { font-weight: 600; }
+      .cast-x { display: inline-flex; align-items: center; color: inherit; }
+      .cast-x img { 
+        width: 22px; 
+        height: 22px; 
+        display: block; 
+        border-radius: 50%;         /* 追加: 丸くする */
+        object-fit: cover;          /* 比率を保ちつつ円内に収める */
+      }
+      .visually-hidden { position: absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+      /* 追加: 終了状態のスタイル */
+      .is-closed .ticket-head {
+        color: #999;
+      }
+      .is-closed .ticket-body {
+        opacity: 0.6;
+      }
+      .is-closed .ticket-btn {
+        background-color: #ccc;
+        color: #666;
+        pointer-events: none;
+      }
+
+      /* 追加: KMNZカード内のリンク画像の比率維持 */
+      .kmnz-card img {
+        width: 22px;
+        height: auto;
+      }
+      /* 追加: KMNZカード内のアイコンは正円に（上記を上書き） */
+      .kmnz-card .cast-x img {
+        width: 22px;
+        height: 22px;               /* 正方形にして円形化 */
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      /* 追加: GOODSプレースホルダーのスタイル */
+      .goods-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 0;
+      }
+      .goods-placeholder {
+        background-color: #000;
+        border: 2px solid #fff;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .goods-text {
+        color: #fff;
+        font-size: 24px;
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+      }
+      .goods-placeholder::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        height: 300%;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+        z-index: 0;
+      }
+      @keyframes pulse {
+        0% {
+          transform: translate(-50%, -50%) scale(0.8);
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(0.8);
+        }
+      }
+
+
+/*追加*/
+      .credit-section {
+        max-width: 720px;
+        margin: 40px auto;
+        padding: 0 16px;
+        color: #fff; 
+      }
+      .credit-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        border-top: 1px solid rgba(255,255,255,0.25);
+        padding-top: 16px;
+      }
+      .credit-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        align-items: center;
+        gap: 12px;
+      }
+      .credit-row dt { margin: 0; font-weight: 800; color: #fff; }
+      .credit-row dd { margin: 0; color: rgba(255,255,255,0.92); }
+
+      .share-btn img {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+      }
+      @media (max-width: 520px) {
+        .credit-row { grid-template-columns: 92px 1fr; }
+      }
