@@ -216,3 +216,22 @@
     update();
     const timer = setInterval(update, 1000);
 })();
+
+// 共有リンク（X / LINE）を現在ページに差し替え
+(function () {
+    function setShareLinks() {
+        const url = encodeURIComponent(location.href);
+        const text = encodeURIComponent(document.title);
+        document.querySelectorAll('.js-share-x').forEach(a => {
+            a.href = `https://x.com/intent/tweet?url=${url}&text=${text}`;
+        });
+        document.querySelectorAll('.js-share-line').forEach(a => {
+            a.href = `https://social-plugins.line.me/lineit/share?url=${url}`;
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setShareLinks);
+    } else {
+        setShareLinks();
+    }
+})();
