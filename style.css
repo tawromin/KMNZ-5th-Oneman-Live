@@ -12,6 +12,7 @@ footer { margin-top: 30px; font-size: 0.9rem; color: #666; text-align: center; }
 html, body {
     background-color: #222227;
     color: #e6e6e6; /* テキストは見える色に調整 */
+    overflow-x: hidden; /* 横スクロールの保険 */
 }
 
 /* loader を確実に中央に配置・固定し、非表示時は見えなくする */
@@ -369,8 +370,14 @@ footer { color: #ddd; }
 
 /* show-info: labels small, values large, center under countdown */
 .show-info {
-    position: absolute;
-    z-index: 2147483647;
+    /* 以前の width: 100vw; position: absolute; は横スクロールの原因 */
+    position: relative;
+    width: 100%;
+    max-width: 1200px;          /* コンテンツ幅を制限 */
+    margin: 0 auto;
+    padding: 0 16px;            /* 画面端の余白 */
+    z-index: 4;                 /* 過剰な z-index を調整 */
+    box-sizing: border-box;
 }
 
 .show-info .info-block {
@@ -461,3 +468,389 @@ body > footer {
     margin-top: auto;
     position: absolute;
 }
+
+a{
+    color: #fff;
+}
+
+.midasi {
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.logo{
+    width: 200px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.kmnz-setsumei {
+    width: 100%;
+    position: absolute;
+    z-index: 2147483647;
+}
+
+/* KMNZ 説明カード */
+.kmnz-card {
+    max-width: 960px; /* 860px -> 960px に拡張 */
+    width: min(960px, calc(100% - 40px)); /* 画面幅から左右20pxずつの余白を確保 */
+    margin: 24px auto;
+    padding: clamp(16px, 3.5vw, 28px);
+    background: var(--main-bg);
+    border: 2px solid rgba(255,255,255,0.95);
+    border-radius: 16px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+    box-sizing: border-box;
+}
+
+/* タイトルのタイポグラフィ（Orbitronを活かす） */
+.kmnz-card-title {
+    margin: 0 0 10px;
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    font-size: clamp(18px, 2.4vw, 26px);
+    color: #fff;
+    text-align: left;
+}
+
+/* 本文のタイポグラフィ（読みやすさ優先） */
+.kmnz-card-text {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", system-ui, -apple-system, sans-serif;
+    font-size: clamp(14px, 1.8vw, 17px);
+    line-height: 1.9;
+    color: rgba(255,255,255,0.92);
+    word-break: break-word;
+}
+
+/* カード内の改行を少しタイトに */
+.kmnz-card-text br { content: ""; display: block; margin-top: 6px; }
+
+/* モバイル微調整 */
+@media (max-width: 520px) {
+    .kmnz-card { margin: 20px auto; } /* 横は width 計算で余白確保済み */
+}
+
+/* フェード専用（動きなしで透明度のみ） */
+.fade-on-scroll.fade-soft {
+    transform: none;                 /* 移動なし */
+    transition: opacity 800ms ease;  /* 透明度のみ */
+    will-change: opacity;
+}
+.fade-on-scroll.fade-soft.in-view {
+    opacity: 1;
+}
+
+/* TICKET セクション */
+.ticket-section {
+    max-width: 1200px; /* 1080px 相当から拡張 */
+    width: min(1200px, calc(100% - 40px)); /* 左右余白を確保しつつ広げる */
+    margin: 24px auto 40px;
+    padding: 0;                 /* 余白は外側の width 調整で確保 */
+    position: relative;
+    z-index: 4;
+    box-sizing: border-box;
+}
+.ticket-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px; /* 18px -> 22px */
+    width: 100%;
+    box-sizing: border-box;
+}
+@media (max-width: 960px) {
+    .ticket-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 600px) {
+    .ticket-grid { grid-template-columns: 1fr; }
+}
+
+.ticket-card {
+    background: var(--main-bg);
+    border: 2px solid rgba(255,255,255,0.95);
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    box-sizing: border-box;
+}
+
+.ticket-head {
+    padding: 14px 16px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.ticket-type {
+    display: inline-block;
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    font-size: 16px;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.22);
+    background: rgba(255,255,255,0.06);
+}
+.ticket-type.fc { accent-color: #6cc; }
+.ticket-type.general { accent-color: #c96; }
+.ticket-type.stream { accent-color: #6c9; }
+
+.ticket-body { padding: 14px 16px 8px; display: grid; gap: 12px; }
+.ticket-period { display: grid; gap: 6px; }
+.ticket-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.6px;
+}
+.ticket-value {
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    color: #fff;
+    font-size: 18px;
+}
+
+.ticket-notes {
+    margin: 0;
+    padding-left: 18px;
+    color: rgba(255,255,255,0.92);
+    font-size: 14px;
+    line-height: 1.7;
+}
+.ticket-notes li { margin: 2px 0; }
+
+.ticket-foot {
+    margin-top: auto;
+    padding: 14px 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.ticket-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #111;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+    text-decoration: none;
+    transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+}
+.ticket-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0,0,0,0.36); }
+.ticket-btn:active { transform: translateY(0); box-shadow: 0 6px 18px rgba(0,0,0,0.28); opacity: 0.9; }
+/* チケット: 終了状態 */
+.ticket-card.is-closed {
+    opacity: 0.92;
+    filter: grayscale(12%);
+}
+.ticket-card.is-closed .ticket-head {
+    background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+}
+.ticket-card .ticket-status {
+    float: right;
+    font-size: 12px;
+    color: #fff;
+    background: #333;
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 4px 8px;
+    border-radius: 999px;
+}
+.ticket-btn.is-disabled {
+    background: #222;
+    color: #aaa;
+    box-shadow: none;
+    cursor: not-allowed;
+    pointer-events: none;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* GOODS プレースホルダー */
+.goods-section {
+    max-width: 1200px;
+    width: min(1200px, calc(100% - 40px));
+    margin: 16px auto 32px;
+    padding: 0;
+    box-sizing: border-box;
+}
+.goods-placeholder {
+    width: 100%;
+    /* 画像を後で入れる想定の比率ボックス（16:9） */
+    aspect-ratio: 16 / 9;
+    border: 2px solid rgba(255,255,255,0.95);
+    border-radius: 16px;
+    background: #111; /* ブラックアウト */
+    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+.goods-text {
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: clamp(18px, 3.2vw, 32px);
+    opacity: 0.9;
+    text-align: center;
+}
+
+/* モバイル微調整 */
+@media (max-width: 520px) {
+    .goods-section { width: min(100%, calc(100% - 24px)); }
+    .goods-placeholder { border-radius: 12px; }
+}
+
+/* 注意事項（アコーディオン） */
+.notes-section {
+    max-width: 960px;
+    width: min(960px, calc(100% - 40px));
+    margin: 8px auto 40px;
+    box-sizing: border-box;
+}
+.accordion { display: grid; gap: 12px; }
+
+.acc-item {
+    border: 2px solid rgba(255,255,255,0.95);
+    border-radius: 12px;
+    background: var(--main-bg);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.32);
+    overflow: hidden;
+}
+.acc-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-weight: 700;
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #fff;
+    position: relative;
+}
+.acc-summary::-webkit-details-marker { display: none; }
+
+/* 開閉アイコン（＋／−） */
+.acc-summary::after {
+    content: "+";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 900;
+    font-size: 18px;
+    opacity: 0.9;
+}
+.acc-item[open] .acc-summary::after {
+    content: "−";
+}
+
+.acc-panel {
+    padding: 12px 16px 16px;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.8;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.04);
+}
+
+/* モバイル微調整 */
+@media (max-width: 520px) {
+    .notes-section { width: min(100%, calc(100% - 24px)); }
+    .acc-summary { padding: 12px 14px; }
+    .acc-panel { padding: 10px 14px 14px; }
+}
+
+/* クレジット */
+.credit-section {
+    max-width: 960px;
+    width: min(960px, calc(100% - 40px));
+    margin: 8px auto 24px;
+    box-sizing: border-box;
+}
+.credit-list {
+    margin: 0;
+    padding: 14px 16px;
+    border: 2px solid rgba(255,255,255,0.95);
+    border-radius: 12px;
+    background: var(--main-bg);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.32);
+    display: grid;
+    gap: 10px;
+}
+.credit-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 12px;
+}
+.credit-row dt {
+    margin: 0;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: .5px;
+}
+.credit-row dd {
+    margin: 0;
+    color: rgba(255,255,255,0.92);
+}
+@media (max-width: 520px) {
+    .credit-row { grid-template-columns: 96px 1fr; }
+}
+
+/* シェア */
+.share-section {
+    max-width: 960px;
+    width: min(960px, calc(100% - 40px));
+    margin: 12px auto 48px;
+    text-align: center;
+}
+.share-title {
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.95);
+    text-decoration: none;
+    font-weight: 800;
+    letter-spacing: .4px;
+    transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease, background 140ms ease, color 140ms ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+}
+.share-btn.x {
+    background: #111;
+    color: #fff;
+}
+.share-btn.line {
+    background: #06C755;
+    border-color: #06C755;
+    color: #fff;
+}
+.share-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0,0,0,0.36); }
+.share-btn:active { transform: translateY(0); opacity: .92; }
