@@ -6,7 +6,7 @@
     const fg = document.querySelector('.front-image');
     const body = document.body;
 
-    // プリロードする画像リスト（必要に応じて追加/変更）
+    // 先に画像を読み込んでおく
     const assets = [
         'images/image1.jpg',
         'images/image2.png',
@@ -49,27 +49,25 @@
     }
 
     function finish() {
-        // ローダーをフェードアウト（クラス付与）
+        
         if (loader) loader.classList.add('hidden');
 
-        // フェードアウトが終わったら DOM から削除（残像防止）
-        // CSS の transition 時間と合わせて少し待つ（500ms）
+        // 待機
         if (loader) setTimeout(() => {
             try { loader.remove(); } catch (e) { /* ignore */ }
         }, 550);
 
-        // ページ全体を「準備完了」状態に（背景色はCSSで既に同じ）
+        // ページの準備完了
         body.classList.add('page-ready');
 
-        // 背景・前景表示
+        // 背景・ロゴ表示
         if (bg) bg.classList.add('loaded');
         if (fg) setTimeout(() => fg.classList.add('visible'), 200);
 
-        // スクロールでフェードインする要素を初期化
         initScrollFade();
     }
 
-    // スクロール時のフェード処理（IntersectionObserver）
+    // スクロールでフェードイン
     function initScrollFade() {
         const items = document.querySelectorAll('.fade-on-scroll');
         if (!items.length) return;
@@ -78,18 +76,17 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('in-view');
-                    // 一度表示したら監視解除（再表示不要なら）
                     observer.unobserve(entry.target);
                 }
             });
         }, {
             root: null,
-            rootMargin: '0px 0px -20% 0px', // 下部で余裕をもって発火
+            rootMargin: '0px 0px -20% 0px', 
             threshold: 0.08
         });
 
         items.forEach(item => {
-            // 既にほぼ見えているものは即時表示して observer を追加しない（安定化）
+            // すでにほぼ画面内にあるものは即時表示
             const rect = item.getBoundingClientRect();
             if (rect.top < window.innerHeight * 0.92) {
                 item.classList.add('in-view');
@@ -100,13 +97,13 @@
     }
 
 
-    // 保険: 長時間かかる時は強制完了
+    // おまじない
     setTimeout(() => {
         targetPercent = 100;
         if (loaded < total) loaded = total;
     }, 8000);
 
-    // main の上端に合わせて --hero-height を更新する関数
+    // 画像にmainが重ならないようにする処理
     function updateHeroHeight() {
         const bgImg = document.querySelector('.bg-image img');
         const spacer = document.querySelector('.hero-spacer');
@@ -119,12 +116,10 @@
         }
 
         function applyHeight() {
-            // 画像の natural サイズから、画面幅に当てたときの描画高さを算出
             const renderedHeight = Math.round(bgImg.naturalHeight * (window.innerWidth / Math.max(1, bgImg.naturalWidth)));
             const h = Math.max(48, renderedHeight); // 最低高さを確保
             document.documentElement.style.setProperty('--hero-height', h + 'px');
             if (spacer) spacer.style.height = h + 'px';
-            // bg-image 要素の高さも合わせる（fixed 用）
             const bg = document.querySelector('.bg-image');
             if (bg) bg.style.height = h + 'px';
         }
@@ -133,41 +128,34 @@
             applyHeight();
         } else {
             bgImg.addEventListener('load', applyHeight, { once: true });
-            // とりあえず fallback をセット
             document.documentElement.style.setProperty('--hero-height', fallback + 'px');
             if (spacer) spacer.style.height = fallback + 'px';
         }
     }
 
-    // リサイズ時・orientationchange で再計算
     window.addEventListener('resize', updateHeroHeight, { passive: true });
     window.addEventListener('orientationchange', updateHeroHeight);
 
-    // 画像のロードが終わったら必ず更新（bg/front 両方を監視しておく）
+
     const imgs = document.querySelectorAll('.bg-image img, .front-image img');
     imgs.forEach(img => {
         img.addEventListener('load', updateHeroHeight, { once: true });
     });
 
-    // finish をラップして先に高さを確定させる（ローダー消去の前に）
     const _finish = finish;
     finish = function () {
         updateHeroHeight();
-        // 少し待ってから既存の finish 実装を実行（loaderのフェードなど）
         setTimeout(() => _finish(), 0);
     };
 
-    // 初期実行
     document.addEventListener('DOMContentLoaded', updateHeroHeight);
-
-    // 既に呼ばれている requestAnimationFrame や finish の流れにより最終的に更新されるはず
 
     requestAnimationFrame(tick);
 })();
 
 // ここからタイマー
 (function () {
-    // top-countdown 初期化（main の上端フェード領域に重ねて表示）
+    // 初期化
     const container = document.querySelector('.top-countdown[data-target]');
     if (!container) return;
 
@@ -217,7 +205,7 @@
     const timer = setInterval(update, 1000);
 })();
 
-// 共有リンク（X / LINE）を現在ページに差し替え
+// 共有リンク
 (function () {
     function setShareLinks() {
         const url = encodeURIComponent(location.href);
