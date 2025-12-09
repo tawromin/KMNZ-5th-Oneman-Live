@@ -48,6 +48,7 @@ html, body {
     background-color: #222227;
     color: #e6e6e6; 
     overflow-x: hidden; 
+    touch-action: pan-y; /*引っかかりを回避 */
 }
 
 .loader {
@@ -98,6 +99,12 @@ html, body {
     transform: translateY(24px);
     transition: opacity 600ms cubic-bezier(.2,.9,.2,1), transform 600ms cubic-bezier(.2,.9,.2,1);
     will-change: opacity, transform;
+}
+
+/* JS初期化前は非表示にしない（読み込み直後の空白回避）*/
+body:not(.page-ready) .fade-on-scroll {
+    opacity: 1;
+    transform: none;
 }
 
 .fade-on-scroll.in-view {
@@ -233,22 +240,7 @@ html, body {
     pointer-events: none;
 }
 
-.bg-image {
-    display: block;
-    width: 100vw;
-    height: auto;
-    max-width: none;
-    pointer-events: none;
-}
-
-.bg-image .front-image,
-.bg-image .front-image.visible {
-    position: static !important;
-    z-index: auto !important;
-    opacity: 0 !important;
-}
 .bg-image.loaded { opacity: 1; }
-.bg-image .front-image.visible { opacity: 1; }
 
 /*メイン文の表示位置の修正*/
 .hero-spacer {
