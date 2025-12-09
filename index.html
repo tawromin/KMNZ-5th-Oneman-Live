@@ -4,170 +4,48 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>KMNZ 5th Oneman Live Going Up</title>
-    <meta name="meta" content="KMNZ 5th Oneman Live Going Upの公式ページです。">
+    <meta name="meta" content="KMNZ 5th Oneman Live Going Upの非公式ファンメイドページです">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
-    <style>
-      /* 出演者リスト用の最小スタイル */
-      .cast-list { max-width: 720px; margin: 24px auto; padding: 0 16px; display: flex; flex-direction: column; gap: 20px; }
-      .cast-item { display: flex; align-items: center; gap: 16px; }
-      .cast-avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 1px solid #e5e5e5; }
-      .cast-info { display: flex; align-items: center; gap: 12px; }
-      .cast-name { font-weight: 600; }
-      .cast-x { display: inline-flex; align-items: center; color: inherit; }
-      .cast-x img { 
-        width: 22px; 
-        height: 22px; 
-        display: block; 
-        border-radius: 50%;         /* 追加: 丸くする */
-        object-fit: cover;          /* 比率を保ちつつ円内に収める */
-      }
-      .visually-hidden { position: absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
-
-      /* 追加: 終了状態のスタイル */
-      .is-closed .ticket-head {
-        color: #999;
-      }
-      .is-closed .ticket-body {
-        opacity: 0.6;
-      }
-      .is-closed .ticket-btn {
-        background-color: #ccc;
-        color: #666;
-        pointer-events: none;
-      }
-
-      /* 追加: KMNZカード内のリンク画像の比率維持 */
-      .kmnz-card img {
-        width: 22px;
-        height: auto;
-      }
-      /* 追加: KMNZカード内のアイコンは正円に（上記を上書き） */
-      .kmnz-card .cast-x img {
-        width: 22px;
-        height: 22px;               /* 正方形にして円形化 */
-        border-radius: 50%;
-        object-fit: cover;
-      }
-
-      /* 追加: GOODSプレースホルダーのスタイル */
-      .goods-section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 40px 0;
-      }
-      .goods-placeholder {
-        background-color: #000;
-        border: 2px solid #fff;
-        border-radius: 8px;
-        padding: 20px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .goods-text {
-        color: #fff;
-        font-size: 24px;
-        font-weight: 700;
-        position: relative;
-        z-index: 1;
-      }
-      .goods-placeholder::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 300%;
-        height: 300%;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        animation: pulse 2s infinite;
-        z-index: 0;
-      }
-      @keyframes pulse {
-        0% {
-          transform: translate(-50%, -50%) scale(0.8);
-        }
-        50% {
-          transform: translate(-50%, -50%) scale(1);
-        }
-        100% {
-          transform: translate(-50%, -50%) scale(0.8);
-        }
-      }
-
-      /* 追加: クレジット・シェアボタン用スタイル */
-      .credit-section {
-        max-width: 720px;
-        margin: 40px auto;
-        padding: 0 16px;
-        color: #fff; /* 白字に変更 */
-      }
-      .credit-list {
-        display: flex;
-        flex-direction: column;
-        gap: 12px; /* 余白を少し広げる */
-        border-top: 1px solid rgba(255,255,255,0.25); /* 白系の細枠 */
-        padding-top: 16px;
-      }
-      .credit-row {
-        display: grid; /* 画像 + 見出し + 内容 */
-        grid-template-columns: 120px 1fr;
-        align-items: center;
-        gap: 12px;
-      }
-      .credit-row dt { margin: 0; font-weight: 800; color: #fff; }
-      .credit-row dd { margin: 0; color: rgba(255,255,255,0.92); }
-
-      /* シェアボタン内アイコン */
-      .share-btn img {
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        object-fit: cover;
-        display: block;
-      }
-      @media (max-width: 520px) {
-        .credit-row { grid-template-columns: 92px 1fr; }
-      }
-    </style>
+    <!-- X(旧Twitter) ウィジェット読み込み -->
 </head>
 <body>
-<!-- loader を追加 -->
+<!-- ローディング部分 -->
 <div id="loader" aria-hidden="false" class="loader">
-    <img src="images/logo.png" alt="" class="loader-logo" />
+    <img src="images/logo.png" alt="ロゴ" class="loader-logo" />
     <div class="loader-bar-wrap" aria-hidden="true">
         <div class="loader-bar">
             <div class="loader-progress" style="width:0%"></div>
         </div>
-        <img src="images/thumb.png" alt="" class="loader-thumb" style="left:0%" />
+        <img src="images/thumb.png" alt="" class="loader-thumb" style="left:0%" /> <!-- 使わない -->
         <div class="loader-percent">0%</div>
     </div>
 </div>
 
-<!-- ここを background -> img に変更 -->
+<!-- 背景の画像 -->
 <div class="bg-image" aria-hidden="true">
     <img src="images/image1.jpg" alt="">
 </div>
+<!-- 透過したロゴ -->
 <div class="front-image" aria-hidden="true">
     <img src="images/image2.png" alt="">
 </div>
 
-<!-- 追加: 固定表示にする際のプレースホルダー（画像と同じ高さを確保） -->
+<!-- 画像の高さ分だけmainを下げる -->
 <div class="hero-spacer" aria-hidden="true"></div>
 
+<!--ここからスクロール可能部分-->
 <main class="site-main">
-    <div class="top-countdown" data-target="2026-01-12" aria-label="イベントまでのカウントダウン">
-        <div class="top-countdown-title">開催まで</div>
+    <div class="top-countdown" data-target="2026-01-12" aria-label="開園時間までのカウントダウン">
+        <div class="top-countdown-title">開演まで</div>
         <div class="cd-item"><span class="cd-val" data-unit="days">0</span><span class="cd-label">日</span></div>
         <div class="cd-item"><span class="cd-val" data-unit="hours">00</span><span class="cd-label">時間</span></div>
         <div class="cd-item"><span class="cd-val" data-unit="minutes">00</span><span class="cd-label">分</span></div>
         <div class="cd-item"><span class="cd-val" data-unit="seconds">00</span><span class="cd-label">秒</span></div>
     </div><br>
 
-    <!-- 公演情報（ラベル小 / 値大） -->
+    <!--公演情報 -->
     <div class="show-info" aria-hidden="false">
         <div class="info-block">
             <div class="info-label">公演名</div>
@@ -196,13 +74,13 @@
         <div style="min-height:5vh;"></div>
         <div class="midasi">ABOUT KMNZ</div>
 
-        <!-- ここから: 出演者リストを show-info 内へ -->
-        <section class="cast-list" aria-label="出演者情報">
+        <!-- KMNZの情報 -->
+        <section class="cast-list" aria-label="KMN情報">
           <article class="cast-item fade-on-scroll">
             <img class="cast-avatar" src="https://pbs.twimg.com/profile_images/1998014187231121408/KPz_YIWf_400x400.jpg" alt="LITADON">
             <div class="cast-info">
               <div class="cast-name">KMNZ LITA</div>
-              <a class="cast-x" href="https://x.com/kmnzlita" target="_blank" rel="noopener noreferrer" aria-label="Xで出演者1を見る">
+              <a class="cast-x" href="https://x.com/kmnzlita" target="_blank" rel="noopener noreferrer">
                 <img src="images/x.jpg" alt="" aria-hidden="true" width="22" height="22">
               </a>
             </div>
@@ -212,7 +90,7 @@
             <img class="cast-avatar" src="https://pbs.twimg.com/profile_images/1998075937594966020/axm1U68R_400x400.jpg" alt="NERONERO">
             <div class="cast-info">
               <div class="cast-name">KMNZ NERO</div>
-              <a class="cast-x" href="https://x.com/kmnznero_" target="_blank" rel="noopener noreferrer" aria-label="Xで出演者2を見る">
+              <a class="cast-x" href="https://x.com/kmnznero_" target="_blank" rel="noopener noreferrer">
                 <img src="images/x.jpg" alt="" aria-hidden="true" width="22" height="22">
               </a>
             </div>
@@ -222,32 +100,32 @@
             <img class="cast-avatar" src="https://pbs.twimg.com/profile_images/1998014293640712192/RLY3YZAb_400x400.jpg" alt="CHINA">
             <div class="cast-info">
               <div class="cast-name">KMNZ TINA</div>
-              <a class="cast-x" href="https://x.com/kmnztina_" target="_blank" rel="noopener noreferrer" aria-label="Xで出演者3を見る">
+              <a class="cast-x" href="https://x.com/kmnztina_" target="_blank" rel="noopener noreferrer">
                 <img src="images/x.jpg" alt="" aria-hidden="true" width="22" height="22">
               </a>
             </div>
           </article>
         </section>
-        <!-- ここまで -->
+        
 
-        <!-- ここから: 説明カードを show-info 内へ -->
+        <!-- 説明文 -->
         <section class="kmnz-card fade-on-scroll fade-soft" aria-label="KMNZについて">
           <p class="kmnz-card-text">
             KMNZ(ケモノズ)は、KMNZ LITA(リタ)、KMNZ NERO(ネロ)、KMNZ TINA(ティナ) の3人組による、バーチャルHIPHOPユニット。<br>
             ファンを指す呼称は「KMNHZ(ケモノヘッズ)」。
           </p>
-          <!-- 末尾にYouTubeリンク（Xと同様の表示） -->
+          <!--youtube、Xへのリンク-->
           <a class="cast-x" href="https://www.youtube.com/@kmnz" target="_blank" rel="noopener noreferrer" aria-label="KMNZのYouTube">
             <img src="images/youtube.png" alt="" aria-hidden="true" width="22">
             <span class="visually-hidden">YouTube</span>
           </a>
-          <!-- 右隣にXアイコンを追加 -->
+
           <a class="cast-x" href="https://x.com/kmnstreet" target="_blank" rel="noopener noreferrer" aria-label="KMNZ公式X" style="margin-left:8px;">
             <img src="images/x.jpg" alt="" aria-hidden="true" width="22">
             <span class="visually-hidden">X</span>
           </a>
         </section>
-        <!-- ここまで -->
+        
 
         <!-- チケットの情報 -->
         <div style="min-height:5vh;"></div>
@@ -258,7 +136,6 @@
             <article class="ticket-card fade-on-scroll is-closed">
               <header class="ticket-head">
                 <span class="ticket-type fc">KMNCLUB先行</span>
-                <!-- 終了バッジ -->
                 <span class="ticket-status">受付終了しました</span>
               </header>
               <div class="ticket-body">
@@ -301,6 +178,7 @@
               </footer>
             </article>
 
+            <!-- 3rd onemanの情報をもとに記述(未発表)-->
             <article class="ticket-card fade-on-scroll fade-soft">
               <header class="ticket-head">
                 <span class="ticket-type stream">ネット配信チケット</span>
@@ -316,7 +194,7 @@
                 </ul>
               </div>
               <footer class="ticket-foot">
-                <a class="ticket-btn" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="ネット配信チケットの購入サイトへ">
+                <a class="ticket-btn" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="Z-an？のチケット購入ページへ">
                   視聴チケットへ
                 </a>
               </footer>
@@ -324,16 +202,16 @@
           </div>
         </section>
 
+        <!--グッズ情報出たら差し替え-->
         <div style="min-height:5vh;"></div>
         <div class="midasi">GOODS</div>
-        <!-- GOODS プレースホルダー -->
-        <section class="goods-section" aria-label="グッズ情報（準備中）">
+        <section class="goods-section" aria-label="グッズ情報(準備中)">
           <div class="goods-placeholder fade-on-scroll fade-soft">
             <div class="goods-text">COMING SOON...</div>
           </div>
         </section>
 
-        <!-- 注意事項 -->
+        <!-- 注意事項 RK music公式より転載-->
         <div class="midasi">注意事項</div>
         <section class="notes-section" aria-label="注意事項">
           <div class="accordion">
@@ -409,6 +287,12 @@
         </section>
 
         <div style="min-height:5vh;"></div>
+        <div class="midasi">X 公式情報</div>
+
+        <!-- Xのポスト　-->
+        <a class="twitter-timeline" href="https://twitter.com/KMNSTREET?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+        <div style="min-height:5vh;"></div>
         <div class="midasi">クレジット</div>
 
         <!-- クレジット -->
@@ -440,14 +324,16 @@
             </a>
           </div>
         </section>
+            <footer class="footer">
+        <div style="min-height:1vh;"></div>
+            <br>このサイトは非公式のファンメイドページです。
+            <p>2025 @ru_vwf</p>
+    </footer>
     </div>
 
 
     <!-- 消すと動かない -->
-    <footer class="footer">
-        <div style="min-height:15vh;"></div>
-            <p>2025 @ru_vwf</p>
-    </footer>
+
 </main>
 
 </body>
