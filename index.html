@@ -1,340 +1,912 @@
-<!doctype html>
-<html lang="ja">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>KMNZ 5th Oneman Live Going Up</title>
-    <meta name="meta" content="KMNZ 5th Oneman Live Going Upの非公式ファンメイドページです">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    <script src="script.js" defer></script>
-    <!-- X(旧Twitter) ウィジェット読み込み -->
-</head>
-<body>
-<!-- ローディング部分 -->
-<div id="loader" aria-hidden="false" class="loader">
-    <img src="images/logo.png" alt="ロゴ" class="loader-logo" />
-    <div class="loader-bar-wrap" aria-hidden="true">
-        <div class="loader-bar">
-            <div class="loader-progress" style="width:0%"></div>
-        </div>
-        <img src="images/thumb.png" alt="" class="loader-thumb" style="left:0%" /> <!-- 使わない -->
-        <div class="loader-percent">0%</div>
-    </div>
-</div>
+:root { 
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    line-height: 1.5; 
+}
 
-<!-- 背景の画像 -->
-<div class="bg-image" aria-hidden="true">
-    <img src="images/image1.jpg" alt="">
-</div>
-<!-- 透過したロゴ -->
-<div class="front-image" aria-hidden="true">
-    <img src="images/image2.png" alt="">
-</div>
+:root { 
+    --hero-overlap: 96px; 
+    --main-bg: #222227; 
+}
 
-<!-- 画像の高さ分だけmainを下げる -->
-<div class="hero-spacer" aria-hidden="true"></div>
+body { 
+    margin: 0; 
+    color: #222; 
+    background: #f7f7f7; 
+}
+.wrap { 
+    max-width: 900px; 
+    margin: 40px auto; 
+    padding: 20px; 
+    background: rgba(255,255,255,0.9); 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); 
+}
 
-<!--ここからスクロール可能部分-->
-<main class="site-main">
-    <div class="top-countdown" data-target="2026-01-12" aria-label="開園時間までのカウントダウン">
-        <div class="top-countdown-title">開演まで</div>
-        <div class="cd-item"><span class="cd-val" data-unit="days">0</span><span class="cd-label">日</span></div>
-        <div class="cd-item"><span class="cd-val" data-unit="hours">00</span><span class="cd-label">時間</span></div>
-        <div class="cd-item"><span class="cd-val" data-unit="minutes">00</span><span class="cd-label">分</span></div>
-        <div class="cd-item"><span class="cd-val" data-unit="seconds">00</span><span class="cd-label">秒</span></div>
-    </div><br>
+header h1 { 
+    margin: 0 0 8px; 
+    font-size: 1.6rem; 
+}
 
-    <!--公演情報 -->
-    <div class="show-info" aria-hidden="false">
-        <div class="info-block">
-            <div class="info-label">公演名</div>
-            <div class="info-value">KMNZ 5th Oneman Live</div>
-        </div>
-        <br>
-        <div class="info-block fade-on-scroll">
-            <div class="info-label">TITLE</div>
-            <div class="info-value">Going Up</div>
-        </div>
-        <br>
-        <div class="info-block fade-on-scroll">
-            <div class="info-label">STAGE</div>
-            <a href="https://www.zepp.co.jp/hall/shinjuku/"><div class="info-value">Zepp新宿(TOKYO)</div></a>
-        </div>
-        <br>
-        <div class="info-block fade-on-scroll">
-            <div class="info-label">DATE</div>
-            <div class="info-value">2026/01/12</div>
-        </div>
-        <div class="info-block fade-on-scroll">
-            <div class="info-label"></div>
-            <div class="info-value">開場16:00 開始17:00</div>
-        </div>
+nav { 
+    margin-top: 8px; 
+}
 
-        <div style="min-height:5vh;"></div>
-        <div class="midasi">ABOUT KMNZ</div>
+nav a { 
+    color: #0366d6; 
+    text-decoration: none; 
+    margin-right: 12px; 
+}
 
-        <!-- KMNZの情報 -->
-        <section class="cast-list" aria-label="KMN情報">
-          <article class="cast-item fade-on-scroll">
-            <img class="cast-avatar" src="https://pbs.twimg.com/profile_images/1998014187231121408/KPz_YIWf_400x400.jpg" alt="LITADON">
-            <div class="cast-info">
-              <div class="cast-name">KMNZ LITA</div>
-              <a class="cast-x" href="https://x.com/kmnzlita" target="_blank" rel="noopener noreferrer">
-                <img src="images/x.jpg" alt="" aria-hidden="true" width="22" height="22">
-              </a>
-            </div>
-          </article>
+footer { 
+    margin-top: 30px; 
+    font-size: 0.9rem;  
+    color: #666; 
+    text-align: center;
+    z-index: 99999;
+}
 
-          <article class="cast-item fade-on-scroll">
-            <img class="cast-avatar" src="https://pbs.twimg.com/profile_images/1998075937594966020/axm1U68R_400x400.jpg" alt="NERONERO">
-            <div class="cast-info">
-              <div class="cast-name">KMNZ NERO</div>
-              <a class="cast-x" href="https://x.com/kmnznero_" target="_blank" rel="noopener noreferrer">
-                <img src="images/x.jpg" alt="" aria-hidden="true" width="22" height="22">
-              </a>
-            </div>
-          </article>
+html, body {
+    background-color: #222227;
+    color: #e6e6e6; 
+    overflow-x: hidden; 
+    touch-action: pan-y; /*引っかかりを回避 */
+}
 
-          <article class="cast-item fade-on-scroll">
-            <img class="cast-avatar" src="https://pbs.twimg.com/profile_images/1998014293640712192/RLY3YZAb_400x400.jpg" alt="CHINA">
-            <div class="cast-info">
-              <div class="cast-name">KMNZ TINA</div>
-              <a class="cast-x" href="https://x.com/kmnztina_" target="_blank" rel="noopener noreferrer">
-                <img src="images/x.jpg" alt="" aria-hidden="true" width="22" height="22">
-              </a>
-            </div>
-          </article>
-        </section>
-        
+.loader {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    background: #222227;
+    z-index: 9999;
+    transition: opacity 500ms ease, visibility 500ms;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
 
-        <!-- 説明文 -->
-        <section class="kmnz-card fade-on-scroll fade-soft" aria-label="KMNZについて">
-          <p class="kmnz-card-text">
-            KMNZ(ケモノズ)は、KMNZ LITA(リタ)、KMNZ NERO(ネロ)、KMNZ TINA(ティナ) の3人組による、バーチャルHIPHOPユニット。<br>
-            ファンを指す呼称は「KMNHZ(ケモノヘッズ)」。
-          </p>
-          <!--youtube、Xへのリンク-->
-          <a class="cast-x" href="https://www.youtube.com/@kmnz" target="_blank" rel="noopener noreferrer" aria-label="KMNZのYouTube">
-            <img src="images/youtube.png" alt="" aria-hidden="true" width="22">
-            <span class="visually-hidden">YouTube</span>
-          </a>
+.loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
 
-          <a class="cast-x" href="https://x.com/kmnstreet" target="_blank" rel="noopener noreferrer" aria-label="KMNZ公式X" style="margin-left:8px;">
-            <img src="images/x.jpg" alt="" aria-hidden="true" width="22">
-            <span class="visually-hidden">X</span>
-          </a>
-        </section>
-        
+.loader-logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 280px;
+    width: min(70%, 280px);
+    height: auto;
+}
 
-        <!-- チケットの情報 -->
-        <div style="min-height:5vh;"></div>
-        <div class="midasi">TICKET</div>
+.loader-bar-wrap {
+    position: relative;
+    width: min(560px, 80%);
+    height: 28px;
+}
 
-        <section class="ticket-section" aria-label="チケット情報">
-          <div class="ticket-grid">
-            <article class="ticket-card fade-on-scroll is-closed">
-              <header class="ticket-head">
-                <span class="ticket-type fc">KMNCLUB先行</span>
-                <span class="ticket-status">受付終了しました</span>
-              </header>
-              <div class="ticket-body">
-                <div class="ticket-period">
-                  <span class="ticket-label">受付期間</span>
-                  <span class="ticket-value">終了</span>
-                </div>
-                <ul class="ticket-notes">
-                  <li>KMNZメンバーシップ「KMNCLUB Members」以上に入会している方が対象となります。</li>
-                  <li>プレミアムチケット特典:ライブKVポストカード入りスタンド(直筆サイン入り)</li>
-                  <li>オールスタンディング</li>
-                </ul>
-              </div>
-              <footer class="ticket-foot">
-                <a class="ticket-btn is-disabled" href="https://www.youtube.com/channel/UC68J5pWEshmwhDH45qnpIsg/membership" aria-disabled="true" tabindex="-1">
-                  受付終了
-                </a>
-              </footer>
-            </article>
+/* ローダーの画像非表示部分 */
+.loader-thumb { 
+    display: 
+    none; 
+}
 
-            <article class="ticket-card fade-on-scroll">
-              <header class="ticket-head">
-                <span class="ticket-type general">一般販売</span>
-              </header>
-              <div class="ticket-body">
-                <div class="ticket-period">
-                  <span class="ticket-label">販売期間</span>
-                  <span class="ticket-value">2025/12/10 21:00 ～</span>
-                </div>
-                <ul class="ticket-notes">
-                  <li>チケットの枚数には限りがあります</li>
-                  <li>規定の枚数に達し次第、チケットは販売終了となります</li>
-                  <li>オールスタンディング</li>
-                </ul>
-              </div>
-              <footer class="ticket-foot">
-                <a class="ticket-btn" href="https://t.co/RzLSWZx5ET" target="_blank" rel="noopener noreferrer" aria-label="一般販売の購入サイト">
-                  購入サイトへ
-                </a>
-              </footer>
-            </article>
+/* フェードインさせるならこれつける */
+.fade-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 600ms cubic-bezier(.2,.9,.2,1), transform 600ms cubic-bezier(.2,.9,.2,1);
+    will-change: opacity, transform;
+}
 
-            <!-- 3rd onemanの情報をもとに記述(未発表)-->
-            <article class="ticket-card fade-on-scroll fade-soft">
-              <header class="ticket-head">
-                <span class="ticket-type stream">ネット配信チケット</span>
-              </header>
-              <div class="ticket-body">
-                <div class="ticket-period">
-                  <span class="ticket-label">販売期間</span>
-                  <span class="ticket-value">販売期間未定</span>
-                </div>
-                <ul class="ticket-notes">
-                  <li>※チケットご購入時にシステム利用料が発生します、予めご了承ください。</li>
-                  <li>アーカイブ配信もご視聴いただけます。</li>
-                </ul>
-              </div>
-              <footer class="ticket-foot">
-                <a class="ticket-btn" href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="Z-an？のチケット購入ページへ">
-                  視聴チケットへ
-                </a>
-              </footer>
-            </article>
-          </div>
-        </section>
+/* JS初期化前は非表示にしない（読み込み直後の空白回避）*/
+body:not(.page-ready) .fade-on-scroll {
+    opacity: 1;
+    transform: none;
+}
 
-        <!--グッズ情報出たら差し替え-->
-        <div style="min-height:5vh;"></div>
-        <div class="midasi">GOODS</div>
-        <section class="goods-section" aria-label="グッズ情報(準備中)">
-          <div class="goods-placeholder fade-on-scroll fade-soft">
-            <div class="goods-text">COMING SOON...</div>
-          </div>
-        </section>
+.fade-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-        <!-- 注意事項 RK music公式より転載-->
-        <div class="midasi">注意事項</div>
-        <section class="notes-section" aria-label="注意事項">
-          <div class="accordion">
-            <details class="acc-item fade-on-scroll">
-              <summary class="acc-summary">プレミアム特典に関して</summary>
-              <div class="acc-panel">
-                ・物販の開始時より、会場内に特典引換所を設置いたします。<br>
-                ・特典引換券1枚につき、特典1点をお渡しいたします。<br>
-                ・特典引換券はチケット発券と同時に付与されます。<br>
-                ・終演後も特典の引き換えを受け付けております。<br>
-                ・本特典は“来場特典”となるため、ご来場いただけないお客様への発送対応は行っておりません。あらかじめご了承ください。
-              </div>
-            </details>
+/* ロゴ */
+.loader-logo {
+    max-width: 220px;
+    width: 50%;
+    height: auto;
+    display: block;
+}
 
-            <details class="acc-item fade-on-scroll">
-              <summary class="acc-summary">入場順に関して</summary>
-              <div class="acc-panel">
-                    当日は以下の順番での入場案内を予定しております。<br><br>
+.loader-bar-wrap {
+    position: relative;
+    width: min(560px, 80%);
+    height: 28px;
+}
 
-                    ①先行プレミアムチケット(整理番号順S)<br>
-                    ②一般プレミアムチケット(整理番号順S)<br>
-                    ③先行スタンダードチケット(整理番号順A)<br>
-                    ④一般スタンダードチケット(整理番号順A)<br>
-              </div>
-            </details>
+.loader-bar {
+    width: 100%;
+    height: 8px;
+    background: #e6e6e6;
+    border-radius: 999px;
+    overflow: hidden;
+}
 
-            <details class="acc-item fade-on-scroll">
-              <summary class="acc-summary">グッズ情報</summary>
-              <div class="acc-panel">
-                本公演では当日会場での物販を実施予定となっております。<br>
-                詳細は後日ご案内させていただきます。<br>
-              </div>
-            </details>
+/* プログレスバー本体*/
+.loader-progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,#ff7a59,#ffb86b);
+    transition: width 200ms linear;
+}
 
-            <details class="acc-item fade-on-scroll">
-              <summary class="acc-summary">フラワースタンドに関して</summary>
-              <div class="acc-panel">
-                KMNZに関するフラワースタンドのみ受付させて頂きます。<br>
-                ご依頼主様側にて当日配送、当日回収を指定の上、ご手配をお願いいたします。<br><br>
+.loader-percent {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 6px 8px;
+    border-radius: 999px;
+    pointer-events: none;
+    user-select: none;
+    transition: left 120ms linear, opacity 200ms ease, transform 120ms linear;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    z-index: 2;
+}
 
-                配送時間：当日 9:00~12:00<br>
-                回収時間：当日中<br>
-                回収時間に関しては、当日受け取った運営チームが直接その場で案内いたします。<br>  
-                サイズ規定：厳密な規定はございませんが目安として高さ180cm・200cm以内、足元40cm×40cmにてお願いいたします。   <br><br>
+/*進行位置*/
+.loader-thumb {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 44px;
+    width: 44px;
+    pointer-events: none;
+    user-select: none;
+    transition: left 120ms linear;
+}
 
-                発送先：<br>
-                〒160-0021 東京都新宿区歌舞伎町1-29-1<br> 
-                東急歌舞伎町タワーB1F Zepp Shinjuku正面入口 着付<br><br>
+.bg-image {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: var(--hero-height, 60vh); 
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 700ms ease;
+}
 
-                ※お送りいただきましたフラワースタンドにつきましては、スペース上可能な範囲でロビーに飾らせていただきます。<br>
-                ※多数のフラワースタンドをいただきました場合、すべてを飾ることはできない場合もございますので、予めご了承下さい。<br>
-                ※スタンド花の会場内（会場敷地内の場外も含む）での設置場所については会場利用規定及び、消防法にのっとった形で主催側にて判断させて頂いた上、順不同で設置させていただきます。<br>
-                ※設置場所や順番の指定のご希望には応じられませんので、予めご了承下さい。<br>
-                ※連結モノ等、デザイン上、一般動線エリアでの展示が危険と判断されたものは都合設置ができない場合がございますので、予めご了承下さい。<br>
-              </div>
-            </details>
+.bg-image img {
+    display: block;
+    width: 100vw;
+    height: auto;
+    max-width: none;
+    user-select: none;
+    pointer-events: none;
+}
 
-            <details class="acc-item fade-on-scroll fade-soft">
-              <summary class="acc-summary">プレゼント、お手紙に関して</summary>
-              <div class="acc-panel">
-                当日KMNZへのプレゼント、お手紙は会場内に設置されるプレゼントBOXへお入れください。<br>
-                プレゼント、お手紙に関してはスタッフが中身を確認させて頂きます。<br>
-                また以下に該当するものは、プレゼントとしてお預かりすることが出来ない物となります。<br><br>
+.bg-image  {
+    position: fixed;
+    inset: 0;                
+    width: 100vw;
+    height: var(--hero-height, 60vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0; 
+    opacity: 0;
+    transition: opacity 1600ms ease; /* 1.6秒で表示 */
+}
 
-                ・現金含むギフトカードなど金券類<br>
-                ・生き物、なま物（生花含む）<br>
-                ・飲食物<br>
-                ・開封された物/使用済みのもの ・個人情報が記載されているもの（ハンドルネームは問題ございません）<br>
-                ・その他、運営がお預かり出来ないと判断したもの<br>
-              </div>
-            </details>
-          </div>
-        </section>
+.front-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--hero-height, 60vh);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 100 ;
+    opacity: 0;
+    transition: opacity 3200ms ease; /* 3.2秒で表示 */
+}
 
-        <div style="min-height:5vh;"></div>
-        <div class="midasi">X 公式情報</div>
+.front-image.visible {
+    opacity: 1 !important;
+}
 
-        <!-- Xのポスト　-->
-        <a class="twitter-timeline" href="https://twitter.com/KMNSTREET?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+.front-image img {
+    display: block;
+    width: 100vw;
+    height: auto;
+    max-width: none;
+    pointer-events: none;
+}
 
-        <div style="min-height:5vh;"></div>
-        <div class="midasi">クレジット</div>
+.bg-image.loaded { opacity: 1; }
 
-        <!-- クレジット -->
-        <section class="credit-section" aria-label="クレジット">
-          <dl class="credit-list">
-            <div class="credit-row">
-              <dt>主催</dt><dd>RK Music</dd>
-            </div>
-            <div class="credit-row">
-              <dt>制作</dt><dd>LIVE EXSAM（ライブエグザム）</dd>
-            </div>
-            <div class="credit-row">
-              <dt>運営協力</dt><dd>DISK GARAGE（ディスクガレージ）</dd>
-            </div>
-          </dl>
-        </section>
+/*メイン文の表示位置の修正*/
+.hero-spacer {
+    display: block;
+    width: 100%;
+    height: var(--hero-height, 60vh);
+    pointer-events: none;
+}
 
-        <!-- シェア -->
-        <section class="share-section" aria-label="このページをシェア">
-          <div class="share-title">SHARE</div>
-          <div class="share-buttons">
-            <a class="share-btn x js-share-x" href="#" target="_blank" rel="noopener" aria-label="Xでシェア">
-              <img src="images/x.jpg" alt="" aria-hidden="true" />
-              <span>Xでシェア</span>
-            </a>
-            <a class="share-btn line js-share-line" href="#" target="_blank" rel="noopener" aria-label="LINEでシェア">
-              <img src="images/line.png" alt="" aria-hidden="true" />
-              <span>LINEでシェア</span>
-            </a>
-          </div>
-        </section>
-            <footer class="footer">
-        <div style="min-height:1vh;"></div>
-            <br>このサイトは非公式のファンメイドページです。
-            <p>2025 @ru_vwf</p>
-    </footer>
-    </div>
+.site-main {
+    position: relative;
+    z-index: 2;
+    background: transparent;
+    color: #e6e6e6;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.site-main::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--hero-overlap);
+    bottom: 0;
+    background: var(--main-bg);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* グラデーション*/
+.site-main::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: var(--hero-overlap);
+    pointer-events: none;
+    background: linear-gradient(
+        to bottom,
+        rgba(34,34,39,0) 0%,
+        rgba(34,34,39,0.18) 28%,
+        rgba(34,34,39,0.55) 62%,
+        rgba(34,34,39,1) 100%
+    );
+    z-index: 3;
+}
 
 
-    <!-- 消すと動かない -->
 
-</main>
+/* カウントダウン*/
+.top-countdown {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--hero-overlap, 96px) / 2);
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 5; 
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #fff;
+    text-align: center;
+    padding: 6px 10px;
+    background: linear-gradient(90deg, rgba(0,0,0,0.18), rgba(0,0,0,0.08));
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    user-select: none;
+}
 
-</body>
-</html>
+.top-countdown-title {
+    display: block;
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    font-size: clamp(12px, 1.6vw, 18px);
+    letter-spacing: 1px;
+    color: #fff;
+    opacity: 0.95;
+    margin-bottom: 6px;
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+}
+
+.top-countdown .cd-item { display:flex; flex-direction:column; align-items:center; min-width:56px; }
+.top-countdown .cd-val {
+    font-weight:700;
+    font-size: clamp(18px, 3.6vw, 42px);
+    line-height:1;
+    letter-spacing:0.6px;
+}
+.top-countdown .cd-label {
+    font-size:12px;
+    opacity:0.9;
+    margin-top:4px;
+}
+
+/*数が変わった時のアニメーション*/
+.top-countdown .cd-val.update {
+    transform: scale(1.08);
+    transition: transform 180ms ease;
+}
+
+@media (max-width:520px) {
+    .top-countdown { gap:8px; padding:6px 8px; border-radius:8px; }
+    .top-countdown .cd-item { min-width:44px; }
+    .top-countdown .cd-val { font-size: clamp(16px, 6vw, 28px); }
+    .top-countdown-title { font-size: 13px; margin-bottom: 4px; }
+}
+
+.show-info {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;         
+    margin: 0 auto;
+    padding: 0 16px;
+    z-index: 4;
+    box-sizing: border-box;
+}
+
+.show-info .info-block {
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+}
+
+.show-info .info-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.show-info .info-value {
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+}
+
+@media (max-width:720px) {
+    .show-info { gap: 10px; top: calc(var(--hero-overlap,96px) / 2 + 96px); }
+    .show-info .info-block { min-width: 84px; }
+    .show-info .info-value { font-size: 16px; }
+}
+
+@media (max-width:420px) {
+    .show-info { flex-direction: column; top: calc(var(--hero-overlap,96px) / 2 + 100px); }
+}
+
+body > footer {
+    position: relative;
+    z-index: 99999;
+}
+
+.moji {
+    margin-top: auto;
+    position: absolute;
+}
+
+a{
+    color: #fff;
+}
+
+.midasi {
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.logo{
+    width: 200px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.kmnz-setsumei {
+    width: 100%;
+    position: absolute;
+    z-index: 2147483647;
+}
+
+/* KMNZ 説明カード */
+.kmnz-card {
+    max-width: 960px;
+    width: min(960px, calc(100% - 40px));
+    margin: 24px auto;
+    padding: clamp(16px, 3.5vw, 28px);
+    background: var(--main-bg);
+    border: 2px solid rgba(255,255,255,0.95);
+    border-radius: 16px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+    box-sizing: border-box;
+}
+
+.kmnz-card-title {
+    margin: 0 0 10px;
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    font-size: clamp(18px, 2.4vw, 26px);
+    color: #fff;
+    text-align: left;
+}
+
+.kmnz-card-text {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", system-ui, -apple-system, sans-serif;
+    font-size: clamp(14px, 1.8vw, 17px);
+    line-height: 1.9;
+    color: rgba(255,255,255,0.92);
+    word-break: break-word;
+}
+
+.kmnz-card-text br { content: ""; display: block; margin-top: 6px; }
+
+
+@media (max-width: 520px) {
+    .kmnz-card { margin: 20px auto; } 
+}
+
+/*浮かび上がってくるタイプのフェードはこれもつける*/
+.fade-on-scroll.fade-soft {
+    transform: none;                 
+    transition: opacity 800ms ease;  
+    will-change: opacity;
+}
+.fade-on-scroll.fade-soft.in-view {
+    opacity: 1;
+}
+
+
+.ticket-section {
+    max-width: 1200px; 
+    width: min(1200px, calc(100% - 40px));
+    margin: 24px auto 40px;
+    padding: 0;
+    position: relative;
+    z-index: 4;
+    box-sizing: border-box;
+}
+.ticket-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    width: 100%;
+    box-sizing: border-box;
+}
+@media (max-width: 960px) {
+    .ticket-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 600px) {
+    .ticket-grid { grid-template-columns: 1fr; }
+}
+
+.ticket-card {
+    background: var(--main-bg);
+    border: 2px solid rgba(255,255,255,0.95);
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    box-sizing: border-box;
+}
+
+.ticket-head {
+    padding: 14px 16px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.ticket-type {
+    display: inline-block;
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    font-size: 16px;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.22);
+    background: rgba(255,255,255,0.06);
+}
+.ticket-type.fc { accent-color: #6cc; }
+.ticket-type.general { accent-color: #c96; }
+.ticket-type.stream { accent-color: #6c9; }
+
+.ticket-body { padding: 14px 16px 8px; display: grid; gap: 12px; }
+.ticket-period { display: grid; gap: 6px; }
+.ticket-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.6px;
+}
+.ticket-value {
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    color: #fff;
+    font-size: 18px;
+}
+
+.ticket-notes {
+    margin: 0;
+    padding-left: 18px;
+    color: rgba(255,255,255,0.92);
+    font-size: 14px;
+    line-height: 1.7;
+}
+.ticket-notes li { margin: 2px 0; }
+
+.ticket-foot {
+    margin-top: auto;
+    padding: 14px 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.ticket-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #111;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+    text-decoration: none;
+    transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+}
+.ticket-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0,0,0,0.36); }
+.ticket-btn:active { transform: translateY(0); box-shadow: 0 6px 18px rgba(0,0,0,0.28); opacity: 0.9; }
+
+
+.ticket-card.is-closed {
+    opacity: 0.92;
+    filter: grayscale(12%);
+}
+.ticket-card.is-closed .ticket-head {
+    background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+}
+.ticket-card .ticket-status {
+    float: right;
+    font-size: 12px;
+    color: #fff;
+    background: #333;
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 4px 8px;
+    border-radius: 999px;
+}
+.ticket-btn.is-disabled {
+    background: #222;
+    color: #aaa;
+    box-shadow: none;
+    cursor: not-allowed;
+    pointer-events: none;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* GOODS プレースホルダー */
+.goods-section {
+    max-width: 1200px;
+    width: min(1200px, calc(100% - 40px));
+    margin: 16px auto 32px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*画像後で入れる*/
+.goods-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 2px solid rgba(255,255,255,0.95);
+    border-radius: 16px;
+    background: #111;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+.goods-text {
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: clamp(18px, 3.2vw, 32px);
+    opacity: 0.9;
+    text-align: center;
+}
+
+@media (max-width: 520px) {
+    .goods-section { width: min(100%, calc(100% - 24px)); }
+    .goods-placeholder { border-radius: 12px; }
+}
+
+.notes-section {
+    max-width: 960px;
+    width: min(960px, calc(100% - 40px));
+    margin: 8px auto 40px;
+    box-sizing: border-box;
+}
+.accordion { display: grid; gap: 12px; }
+
+.acc-item {
+    border: 2px solid rgba(255,255,255,0.95);
+    border-radius: 12px;
+    background: var(--main-bg);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.32);
+    overflow: hidden;
+}
+.acc-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-weight: 700;
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #fff;
+    position: relative;
+}
+.acc-summary::-webkit-details-marker { display: none; }
+
+/* 開閉アイコン*/
+.acc-summary::after {
+    content: "+";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 900;
+    font-size: 18px;
+    opacity: 0.9;
+}
+.acc-item[open] .acc-summary::after {
+    content: "−";
+}
+
+.acc-panel {
+    padding: 12px 16px 16px;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.8;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.04);
+}
+
+@media (max-width: 520px) {
+    .notes-section { width: min(100%, calc(100% - 24px)); }
+    .acc-summary { padding: 12px 14px; }
+    .acc-panel { padding: 10px 14px 14px; }
+}
+
+/* クレジット */
+.credit-section {
+    max-width: 960px;
+    width: min(960px, calc(100% - 40px));
+    margin: 8px auto 24px;
+    box-sizing: border-box;
+}
+.credit-list {
+    margin: 0;
+    padding: 14px 16px;
+    border: 2px solid rgba(255,255,255,0.95);
+    border-radius: 12px;
+    background: var(--main-bg);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.32);
+    display: grid;
+    gap: 10px;
+}
+.credit-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 12px;
+}
+.credit-row dt {
+    margin: 0;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: .5px;
+}
+.credit-row dd {
+    margin: 0;
+    color: rgba(255,255,255,0.92);
+}
+@media (max-width: 520px) {
+    .credit-row { grid-template-columns: 96px 1fr; }
+}
+
+/* シェア */
+.share-section {
+    max-width: 960px;
+    width: min(960px, calc(100% - 40px));
+    margin: 12px auto 48px;
+    text-align: center;
+}
+.share-title {
+    font-family: "Orbitron", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.95);
+    text-decoration: none;
+    font-weight: 800;
+    letter-spacing: .4px;
+    transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease, background 140ms ease, color 140ms ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+}
+.share-btn.x {
+    background: #111;
+    color: #fff;
+}
+.share-btn.line {
+    background: #06C755;
+    border-color: #06C755;
+    color: #fff;
+}
+.share-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0,0,0,0.36); }
+.share-btn:active { transform: translateY(0); opacity: .92; }
+
+/* 出演者リスト用の最小スタイル */
+      .cast-list { max-width: 720px; margin: 24px auto; padding: 0 16px; display: flex; flex-direction: column; gap: 20px; }
+      .cast-item { display: flex; align-items: center; gap: 16px; }
+      .cast-avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 1px solid #e5e5e5; }
+      .cast-info { display: flex; align-items: center; gap: 12px; }
+      .cast-name { font-weight: 600; }
+      .cast-x { display: inline-flex; align-items: center; color: inherit; }
+      .cast-x img { 
+        width: 22px; 
+        height: 22px; 
+        display: block; 
+        border-radius: 50%;         /* 追加: 丸くする */
+        object-fit: cover;          /* 比率を保ちつつ円内に収める */
+      }
+      .visually-hidden { position: absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+      /* 追加: 終了状態のスタイル */
+      .is-closed .ticket-head {
+        color: #999;
+      }
+      .is-closed .ticket-body {
+        opacity: 0.6;
+      }
+      .is-closed .ticket-btn {
+        background-color: #ccc;
+        color: #666;
+        pointer-events: none;
+      }
+
+      /* 追加: KMNZカード内のリンク画像の比率維持 */
+      .kmnz-card img {
+        width: 22px;
+        height: auto;
+      }
+      /* 追加: KMNZカード内のアイコンは正円に（上記を上書き） */
+      .kmnz-card .cast-x img {
+        width: 22px;
+        height: 22px;               /* 正方形にして円形化 */
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      /* 追加: GOODSプレースホルダーのスタイル */
+      .goods-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 0;
+      }
+      .goods-placeholder {
+        background-color: #000;
+        border: 2px solid #fff;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .goods-text {
+        color: #fff;
+        font-size: 24px;
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+      }
+      .goods-placeholder::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        height: 300%;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+        z-index: 0;
+      }
+      @keyframes pulse {
+        0% {
+          transform: translate(-50%, -50%) scale(0.8);
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(0.8);
+        }
+      }
+
+
+/*追加*/
+      .credit-section {
+        max-width: 720px;
+        margin: 40px auto;
+        padding: 0 16px;
+        color: #fff; 
+      }
+      .credit-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        border-top: 1px solid rgba(255,255,255,0.25);
+        padding-top: 16px;
+      }
+      .credit-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        align-items: center;
+        gap: 12px;
+      }
+      .credit-row dt { margin: 0; font-weight: 800; color: #fff; }
+      .credit-row dd { margin: 0; color: rgba(255,255,255,0.92); }
+
+      .share-btn img {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+      }
+      @media (max-width: 520px) {
+        .credit-row { grid-template-columns: 92px 1fr; }
+      }
